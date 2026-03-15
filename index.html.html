@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kumkum Sharma — AI Data Trainer & Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f4f3ee;
+    --surface: #ffffff;
+    --surface2: #f9f8f5;
+    --ink: #1a1a2e;
+    --ink2: #4a4a6a;
+    --ink3: #9090aa;
+    --accent: #1D9E75;
+    --accent2: #0F6E56;
+    --accent-light: #d8f2e9;
+    --gold: #9a6010;
+    --gold-light: #fdf0d5;
+    --border: rgba(26,26,46,0.08);
+    --border2: rgba(26,26,46,0.14);
+    --radius: 14px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(244,243,238,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border2);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px; color: var(--ink2); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent2); }
+
+  /* HERO */
+  .hero {
+    max-width: 900px; margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-left {}
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--accent2);
+    background: var(--accent-light);
+    padding: 4px 14px; border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px; line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .hero-name em { font-style: italic; color: var(--accent2); }
+  .hero-sub {
+    font-size: 15px; color: var(--ink2);
+    margin-bottom: 1.5rem; line-height: 1.7;
+    max-width: 380px;
+  }
+  .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 10px 22px; border-radius: 8px;
+    background: var(--accent2); color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px; font-weight: 500;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+  .btn-outline {
+    padding: 10px 22px; border-radius: 8px;
+    background: transparent;
+    border: 1px solid var(--border2);
+    color: var(--ink2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px; font-weight: 500;
+    text-decoration: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-outline:hover { background: var(--surface); }
+
+  /* hero right — floating card */
+  .hero-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute; top: -50px; right: -50px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    opacity: 0.5;
+  }
+  .avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px; color: #fff;
+    margin-bottom: 1rem; position: relative; z-index: 1;
+  }
+  .card-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; color: var(--ink);
+    margin-bottom: 2px; position: relative; z-index: 1;
+  }
+  .card-role {
+    font-size: 12.5px; color: var(--ink3);
+    margin-bottom: 1.25rem; position: relative; z-index: 1;
+  }
+  .card-stats {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px; margin-bottom: 1rem; position: relative; z-index: 1;
+  }
+  .cstat {
+    background: var(--surface2);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .cstat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; color: var(--accent2); line-height: 1;
+  }
+  .cstat-label { font-size: 10px; color: var(--ink3); margin-top: 2px; line-height: 1.3; }
+  .card-location {
+    font-size: 12px; color: var(--ink3);
+    display: flex; align-items: center; gap: 5px;
+    position: relative; z-index: 1;
+  }
+
+  /* SECTIONS */
+  .section {
+    max-width: 900px; margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 2rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px; color: var(--ink);
+  }
+  .section-line {
+    flex: 1; height: 0.5px;
+    background: var(--border2);
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 14px; }
+  .exp-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .exp-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.07); }
+  .exp-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 4px 0 0 4px;
+  }
+  .exp-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 12px; margin-bottom: 4px;
+  }
+  .exp-company { font-size: 16px; font-weight: 500; color: var(--ink); }
+  .exp-badge {
+    font-size: 11px; padding: 3px 12px; border-radius: 20px;
+    background: var(--accent-light); color: var(--accent2);
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .exp-badge-gold {
+    background: var(--gold-light); color: var(--gold);
+  }
+  .exp-role { font-size: 13px; color: var(--ink3); margin-bottom: 12px; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .exp-bullets li {
+    font-size: 13.5px; color: var(--ink2);
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .exp-bullets li::before { content: "→"; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .skill-block {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+  .skill-block-title {
+    font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--accent2); margin-bottom: 10px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 12px; padding: 4px 12px;
+    border-radius: 14px;
+    background: var(--surface2);
+    color: var(--ink2);
+    border: 0.5px solid var(--border);
+  }
+  .tag-accent {
+    background: var(--accent-light);
+    color: var(--accent2);
+    border-color: var(--accent);
+  }
+
+  /* PROJECTS */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .proj-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .proj-card:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(0,0,0,0.08); }
+  .proj-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: var(--accent-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 14px;
+  }
+  .proj-name {
+    font-size: 15px; font-weight: 500;
+    color: var(--ink); margin-bottom: 6px; line-height: 1.3;
+  }
+  .proj-desc {
+    font-size: 13px; color: var(--ink2);
+    line-height: 1.6; margin-bottom: 14px;
+  }
+  .proj-tech { display: flex; flex-wrap: wrap; gap: 5px; }
+  .proj-tech span {
+    font-size: 11px; padding: 3px 9px;
+    border-radius: 10px;
+    background: var(--surface2);
+    color: var(--ink3);
+    border: 0.5px solid var(--border);
+  }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .edu-left {}
+  .edu-degree { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .edu-college { font-size: 13px; color: var(--ink3); }
+  .edu-right { text-align: right; }
+  .edu-cgpa {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px; color: var(--accent2);
+  }
+  .edu-year { font-size: 12px; color: var(--ink3); }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .contact-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .contact-card:hover { background: var(--accent-light); transform: translateY(-1px); }
+  .contact-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: var(--accent-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .contact-label { font-size: 11px; color: var(--ink3); margin-bottom: 2px; }
+  .contact-val { font-size: 13px; font-weight: 500; color: var(--accent2); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12.5px; color: var(--ink3);
+    border-top: 0.5px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left { animation: fadeUp 0.6s ease both; }
+  .hero-card { animation: fadeUp 0.6s 0.15s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 3rem 1.25rem 2rem;
+    }
+    .hero-name { font-size: 36px; }
+    nav { padding: 0 1.25rem; }
+    .nav-links { gap: 1rem; }
+    .section { padding: 3rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">Kumkum Sharma</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Open to Remote Opportunities</div>
+    <h1 class="hero-name">Kumkum<br/><em>Sharma</em></h1>
+    <p class="hero-sub">
+      AI Data Trainer &amp; Full-Stack Developer with 2+ years delivering 98%+ annotation accuracy. Bridging AI training pipelines with production-grade engineering.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="mailto:kumkumsharma2802@gmail.com">Get in Touch</a>
+      <a class="btn-outline" href="https://linkedin.com/in/kumkum-sharma28" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="avatar">KS</div>
+    <div class="card-name">Kumkum Sharma</div>
+    <div class="card-role">AI Data Trainer · Full-Stack Developer</div>
+    <div class="card-stats">
+      <div class="cstat">
+        <div class="cstat-num">98%</div>
+        <div class="cstat-label">Annotation accuracy</div>
+      </div>
+      <div class="cstat">
+        <div class="cstat-num">2+</div>
+        <div class="cstat-label">Years in AI training</div>
+      </div>
+      <div class="cstat">
+        <div class="cstat-num">35%</div>
+        <div class="cstat-label">API latency cut</div>
+      </div>
+    </div>
+    <div class="card-location">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Amritsar, Punjab · Remote-friendly
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="section-header">
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-card">
+      <div class="exp-top">
+        <div class="exp-company">RWS · Outlier.ai · Welocalize · Sigma AI</div>
+        <span class="exp-badge">Jan 2023 – Present</span>
+      </div>
+      <div class="exp-role">AI Data Trainer &amp; Annotator · Remote</div>
+      <ul class="exp-bullets">
+        <li>Annotated large-scale image, text, video &amp; audio datasets for model training and validation</li>
+        <li>Led computer vision projects: object detection, segmentation &amp; classification using Labelbox and CVAT</li>
+        <li>Contributed to NLP tasks — text categorisation, sentiment analysis, prompt evaluation for LLMs</li>
+        <li>Maintained 98%+ annotation accuracy through rigorous QA audits across all platforms</li>
+        <li>Participated in RLHF (Reinforcement Learning from Human Feedback) for conversational AI systems</li>
+        <li>Collaborated with data scientists to refine annotation guidelines and improve dataset quality</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-top">
+        <div class="exp-company">MITS Solution</div>
+        <span class="exp-badge">Nov 2024 – Present</span>
+      </div>
+      <div class="exp-role">Software Development Engineer · Bangalore, Onsite</div>
+      <ul class="exp-bullets">
+        <li>Developed scalable web &amp; SaaS applications using MERN Stack and AWS Cloud</li>
+        <li>Reduced API latency by 35% through optimised backend architecture with Redis caching</li>
+        <li>Designed microservices using Docker &amp; AWS EC2; integrated data pipelines for analytics dashboards</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-top">
+        <div class="exp-company">Welocalize</div>
+        <span class="exp-badge exp-badge-gold">Jun – Oct 2024</span>
+      </div>
+      <div class="exp-role">Software Engineering Intern · Remote</div>
+      <ul class="exp-bullets">
+        <li>Built internal AI data management dashboards using React, Node.js and AWS Lambda</li>
+        <li>Automated data upload &amp; validation workflows via GitHub Actions and AWS S3</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-top">
+        <div class="exp-company">Study Notion EdTech Platform</div>
+        <span class="exp-badge exp-badge-gold">May – Sep 2024</span>
+      </div>
+      <div class="exp-role">React Developer Intern</div>
+      <ul class="exp-bullets">
+        <li>Developed responsive UI components using React.js and TailwindCSS</li>
+        <li>Integrated APIs and deployed the platform on Vercel</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-header">
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <div class="skill-block-title">Annotation Tools</div>
+      <div class="tags">
+        <span class="tag tag-accent">Labelbox</span>
+        <span class="tag tag-accent">CVAT</span>
+        <span class="tag tag-accent">SuperAnnotate</span>
+        <span class="tag tag-accent">Scale AI</span>
+        <span class="tag tag-accent">SageMaker GT</span>
+        <span class="tag tag-accent">Roboflow</span>
+        <span class="tag tag-accent">LabelImg</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">AI &amp; ML</div>
+      <div class="tags">
+        <span class="tag">RLHF</span>
+        <span class="tag">Prompt Evaluation</span>
+        <span class="tag">Model Fine-Tuning</span>
+        <span class="tag">Data Preprocessing</span>
+        <span class="tag">QA Auditing</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">OpenCV</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Programming</div>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Bash</span>
+        <span class="tag">React.js</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">Pandas</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Cloud &amp; DevOps</div>
+      <div class="tags">
+        <span class="tag">AWS S3</span>
+        <span class="tag">AWS Lambda</span>
+        <span class="tag">AWS EC2</span>
+        <span class="tag">Docker</span>
+        <span class="tag">GitHub Actions</span>
+        <span class="tag">Redis</span>
+        <span class="tag">MongoDB</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Data Types</div>
+      <div class="tags">
+        <span class="tag">Image</span>
+        <span class="tag">Video</span>
+        <span class="tag">Text</span>
+        <span class="tag">Audio</span>
+        <span class="tag">3D Point Cloud</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Tools</div>
+      <div class="tags">
+        <span class="tag">Jira</span>
+        <span class="tag">Trello</span>
+        <span class="tag">Slack</span>
+        <span class="tag">Postman</span>
+        <span class="tag">Excel</span>
+        <span class="tag">Google Sheets</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-header">
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-icon">🖼️</div>
+      <div class="proj-name">AI-Powered Image Annotation Dashboard</div>
+      <p class="proj-desc">Custom dashboard for image segmentation and bounding box labelling, with AWS S3 integration for scalable dataset storage and retrieval.</p>
+      <div class="proj-tech">
+        <span>React.js</span><span>Node.js</span><span>AWS S3</span><span>OpenCV</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">☁️</div>
+      <div class="proj-name">Cloud-Based Task Management System</div>
+      <p class="proj-desc">Scalable system for managing distributed annotation tasks with real-time WebSocket updates and JWT-secured authentication.</p>
+      <div class="proj-tech">
+        <span>MERN</span><span>AWS Lambda</span><span>JWT</span><span>WebSockets</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">💬</div>
+      <div class="proj-name">Real-Time Chat Application</div>
+      <p class="proj-desc">Collaborative real-time communication platform for distributed annotation teams, powered by Socket.io and Redis-backed sessions.</p>
+      <div class="proj-tech">
+        <span>React.js</span><span>Node.js</span><span>Socket.io</span><span>MongoDB</span><span>Redis</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section" id="education">
+  <div class="section-header">
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-card">
+    <div class="edu-left">
+      <div class="edu-degree">B.Sc. Non-Medical</div>
+      <div class="edu-college">D.A.V. College, Amritsar, Punjab</div>
+    </div>
+    <div class="edu-right">
+      <div class="edu-cgpa">7.31 <span style="font-size:14px;color:var(--ink3)">/ 10</span></div>
+      <div class="edu-year">2022 – 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <a class="contact-card" href="mailto:kumkumsharma2802@gmail.com">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-val">kumkumsharma2802@gmail.com</div>
+      </div>
+    </a>
+    <a class="contact-card" href="https://linkedin.com/in/kumkum-sharma28" target="_blank">
+      <div class="contact-icon">🔗</div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-val">kumkum-sharma28</div>
+      </div>
+    </a>
+    <a class="contact-card" href="tel:+919041355685">
+      <div class="contact-icon">📞</div>
+      <div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-val">+91 9041355685</div>
+      </div>
+    </a>
+    <div class="contact-card" style="cursor:default">
+      <div class="contact-icon">📍</div>
+      <div>
+        <div class="contact-label">Location</div>
+        <div class="contact-val">Amritsar, Punjab · Remote-friendly</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Kumkum Sharma · Built with purpose
+</footer>
+
+</body>
+</html>
